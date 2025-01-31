@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('car_id')->references('car_id')->on('cars')->onDelete('cascade');
             $table->string('log_number');
             $table->string('event');
-            $table->date('event_time');
+            $table->date('event_time')->nullable();
             $table->string('document_id');
             $table->unique(['client_id', 'car_id', 'log_number']);
         });
