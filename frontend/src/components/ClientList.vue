@@ -1,4 +1,5 @@
 <template>
+  <!-- Clients list -->
   <h3 class="mb-3 mt-5 pb-2 w-25 border-bottom border-2 border-dark">Összes ügyfél</h3>
   <table class="table table-striped table-hover table-bordered table-responsive table-dark">
     <thead>
@@ -15,6 +16,7 @@
           <td><button @click="selectClient(client.id)" class="btn w-100 text-white">{{ client.name }}</button></td>
           <td>{{ client.card_number }}</td>
         </tr>
+        <!-- Car list for active client -->
         <tr v-if="selectedClientId === client.id">
           <td colspan="3">
             <CarList :client-id="client.id" />
@@ -38,6 +40,7 @@ const emit = defineEmits(['select-client']);
 
 const selectedClientId = ref<number | null>(null);
 
+/* Select and unselect client */
 const selectClient = (clientId: number) => {
   if (selectedClientId.value === clientId) {
     selectedClientId.value = null; // Unselect if the same client is clicked

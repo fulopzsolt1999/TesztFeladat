@@ -1,4 +1,5 @@
 <template>
+  <!-- Services list -->
    <table class="table table-striped table-hover table-bordered table-responsive table-light">
      <thead>
        <tr class="text-center align-middle text-uppercase">
@@ -32,6 +33,7 @@
  
  const services = ref([]);
  
+ /* Watch for changes in clientId and carId */
  watch(() => [props.clientId, props.carId], async ([newClientId, newCarId]) => {
    if (newClientId !== null && newCarId !== null) {
       try {

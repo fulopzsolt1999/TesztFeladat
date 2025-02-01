@@ -1,4 +1,5 @@
 <template>
+  <!-- Search form -->
   <form @submit.prevent="handleSubmit" class="container w-75 mt-5">
     <div class="row">
       <div class="col mb-3">
@@ -9,8 +10,10 @@
       </div>
     </div>
     <div class="d-flex justify-content-center"><button type="submit" class="btn btn-primary mb-3 w-50">Keresés</button></div>
+    <!-- Errors from searching -->
     <div v-if="error" class="alert alert-danger">{{ error }}</div>
   </form>
+  <!-- Searched client data -->
   <div v-if="clientData">
     <h3 class="my-3 pb-2 w-25 border-bottom border-2 border-dark">Keresett ügyfél információ</h3>
     <table class="table table-striped table-hover table-bordered table-responsive table-dark">
@@ -70,7 +73,7 @@ export default defineComponent({
     watch(localSearch, (newValue) => {
       emit('update:search', newValue);
     });
-
+    /* Input validation */
     const validateInput = () => {
       if (!localSearch.value.name && !localSearch.value.document_id) {
         error.value = 'Az egyik mezőt kötelező kitölteni.';
@@ -87,8 +90,9 @@ export default defineComponent({
       error.value = null;
       return true;
     };
-
+    /* Submit form */
     const handleSubmit = async () => {
+
       if (!validateInput()) return;
 
       try {
@@ -106,15 +110,16 @@ export default defineComponent({
           const response = await getClientByDocumentId(localSearch.value.document_id);
           client = response.data[0];
         }
-
+        /* Fetch cars and services */
         if (client) {
           const carsResponse = await getCars(client.id);
           if (!Array.isArray(carsResponse.data.cars)) {
             throw new Error('carsResponse.data.cars is not an array');
           }
-          const numberOfCars = carsResponse.data.cars.length;
 
+          const numberOfCars = carsResponse.data.cars.length;
           let totalServiceLogs = 0;
+
           for (const car of carsResponse.data.cars) {
             const servicesResponse = await getServices(client.id, car.car_id);
             if (!Array.isArray(servicesResponse.data.services)) {

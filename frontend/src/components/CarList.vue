@@ -1,4 +1,5 @@
 <template>
+  <!-- Cars list -->
    <table class="table table-striped table-hover table-bordered table-responsive table-light">
      <thead>
        <tr class="text-center align-middle text-uppercase">
@@ -22,6 +23,7 @@
            <td>{{ car.newest_event }}</td>
            <td>{{ car.newest_event_date }}</td>
          </tr>
+         <!-- Services list for active car -->
          <tr v-if="selectedCarId === car.car_id">
            <td colspan="7">
              <ServiceList :client-id="clientId" :car-id="car.car_id" :car-registered="car.registered"/>
@@ -48,6 +50,7 @@
  const selectedCarId = ref<number | null>(null);
  const selectedCarRegistered = ref<string | null>(null);
  
+ /* Select and unselect car */
  const selectCar = async (carId: number, carRegistered: string) => {
    if (selectedCarId.value === carId) {
       selectedCarId.value = null;
@@ -59,6 +62,7 @@
    }
  };
  
+ /* Fetch cars */
  watch(() => props.clientId, async (newClientId) => {
    if (newClientId !== null) {
      try {
