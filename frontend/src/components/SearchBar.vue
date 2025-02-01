@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleSubmit" class="container w-75 mt-5">
     <div class="row">
       <div class="col mb-3">
         <input type="text" v-model="localSearch.name" class="form-control" placeholder="Ügyfél név...">
@@ -8,32 +8,32 @@
         <input type="text" v-model="localSearch.document_id" class="form-control" placeholder="Ügyfél okmányazonosító...">
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mb-3">Keresés</button>
+    <div class="d-flex justify-content-center"><button type="submit" class="btn btn-primary mb-3 w-50">Keresés</button></div>
     <div v-if="error" class="alert alert-danger">{{ error }}</div>
-    <div v-if="clientData">
-      <h3>Client Information</h3>
-      <table class="table table-striped table-hover table-bordered table-responsive table-dark">
-        <thead>
-          <tr class="text-center text-uppercase">
-            <th scope="col">Ügyfél azonosító</th>
-            <th scope="col">Ügyfél név</th>
-            <th scope="col">Ügyfél okmányazonosító</th>
-            <th scope="col">Autók száma</th>
-            <th scope="col">Összes szervíznapló bejegyzések száma</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="text-center align-middle">
-            <td>{{ clientData.id }}</td>
-            <td>{{ clientData.name }}</td>
-            <td>{{ clientData.document_id }}</td>
-            <td>{{ clientData.numberOfCars }}</td>
-            <td>{{ clientData.totalServiceLogs }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </form>
+  <div v-if="clientData">
+    <h3 class="my-3 pb-2 w-25 border-bottom border-2 border-dark">Keresett ügyfél információ</h3>
+    <table class="table table-striped table-hover table-bordered table-responsive table-dark">
+      <thead>
+        <tr class="text-center align-middle text-uppercase">
+          <th scope="col">Ügyfél azonosító</th>
+          <th scope="col">Ügyfél név</th>
+          <th scope="col">Ügyfél okmányazonosító</th>
+          <th scope="col">Autók száma</th>
+          <th scope="col">Összes szervíznapló bejegyzések száma</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="text-center align-middle">
+          <td>{{ clientData.id }}</td>
+          <td>{{ clientData.name }}</td>
+          <td>{{ clientData.document_id }}</td>
+          <td>{{ clientData.numberOfCars }}</td>
+          <td>{{ clientData.totalServiceLogs }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script lang="ts">
@@ -73,15 +73,15 @@ export default defineComponent({
 
     const validateInput = () => {
       if (!localSearch.value.name && !localSearch.value.document_id) {
-        error.value = 'Either customer name or document ID is required.';
+        error.value = 'Az egyik mezőt kötelező kitölteni.';
         return false;
       }
       if (localSearch.value.name && localSearch.value.document_id) {
-        error.value = 'Only one field should be filled.';
+        error.value = 'Csak az egyik mezőt töltse ki.';
         return false;
       }
       if (localSearch.value.document_id && !/^[a-zA-Z0-9]+$/.test(localSearch.value.document_id)) {
-        error.value = 'Document ID can only contain letters and numbers.';
+        error.value = 'Az okmányazonosító csak betűket és számokat tartalmazhat.';
         return false;
       }
       error.value = null;
@@ -96,7 +96,7 @@ export default defineComponent({
         if (localSearch.value.name) {
           const response = await getClientByName(localSearch.value.name);
           if (response.data.length > 1) {
-            error.value = 'Multiple clients found with the same name.';
+            error.value = 'Pontosítson a keresési feltételeken.';
             clientData.value = null;
             return;
           } else {
@@ -131,8 +131,7 @@ export default defineComponent({
             totalServiceLogs: totalServiceLogs
           };
         }
-      } catch (err) {
-        console.error('Error fetching client data:', err);
+      } catch {
         error.value = 'Error fetching client data.';
         clientData.value = null;
       }
@@ -147,3 +146,36 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+
+  button {
+    height: 3rem;
+    background-color: #a0a0a0;
+    border: none;
+    color: black;
+    transition: all 0.3s ease !important;
+  }
+
+  button:hover {
+    background-color: #333333 !important;
+    color: white !important;
+  }
+
+  input {
+    height: 3rem;
+    border: none;
+    background-color: #a0a0a0;
+    color: black;
+    transition: all 0.3s ease !important;
+  }
+  
+  input:focus {
+    background-color: #333333 !important;
+    color: white !important;
+  }
+
+  input:focus::placeholder {
+    color: white;
+  }
+</style>

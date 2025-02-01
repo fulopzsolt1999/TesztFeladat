@@ -1,7 +1,7 @@
 <template>
    <table class="table table-striped table-hover table-bordered table-responsive table-light">
      <thead>
-       <tr class="text-center text-uppercase">
+       <tr class="text-center align-middle text-uppercase">
          <th>Alkalom sorszáma</th>
          <th>Esemény neve</th>
          <th>Esemény dátuma</th>
@@ -9,7 +9,7 @@
        </tr>
      </thead>
      <tbody>
-       <tr v-for="service in services" :key="service.id">
+       <tr v-for="service in services" :key="service.id" class="text-center align-middle">
          <td>{{ service.log_number }}</td>
          <td>{{ service.event }}</td>
          <td>{{ service.event_time }}</td>

@@ -1,7 +1,7 @@
 <template>
    <table class="table table-striped table-hover table-bordered table-responsive table-light">
      <thead>
-       <tr class="text-center text-uppercase">
+       <tr class="text-center align-middle text-uppercase">
          <th>Autó sorszáma</th>
          <th>Autó típusa</th>
          <th>Regisztrálás időpontja</th>
