@@ -1,1 +1,13 @@
 @import './base.css';
+
+.btn {
+   background-color: unset;
+}
+
+.btn:active {
+   border: none;
+}
+
+button:hover {
+   background-color: #f1f1f1;
+}

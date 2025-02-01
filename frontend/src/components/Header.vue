@@ -1,6 +1,6 @@
 <template>
    <header>
-      <h1>Car Services</h1>
+      <h1>Autószolgáltatások</h1>
    </header>
 </template>
  

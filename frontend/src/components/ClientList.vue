@@ -9,14 +9,13 @@
     </thead>
     <tbody>
       <template v-for="client in props.clients" :key="client.id">
-        <tr>
+        <tr class="text-center align-middle">
           <td>{{ client.id }}</td>
-          <td><button @click="selectClient(client.id)">{{ client.name }}</button></td>
+          <td><button @click="selectClient(client.id)" class="btn w-100 text-white">{{ client.name }}</button></td>
           <td>{{ client.card_number }}</td>
         </tr>
         <tr v-if="selectedClientId === client.id">
           <td colspan="3">
-            <!-- Show results -->
             <CarList :client-id="client.id" />
           </td>
         </tr>

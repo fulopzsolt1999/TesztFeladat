@@ -2,19 +2,19 @@
    <table class="table table-striped table-hover table-bordered table-responsive table-light">
      <thead>
        <tr class="text-center text-uppercase">
-         <th>Car ID</th>
-         <th>Type</th>
-         <th>Registered</th>
-         <th>Own Brand</th>
-         <th>Accident</th>
-         <th>Newest Event</th>
-         <th>Event Date</th>
+         <th>Autó sorszáma</th>
+         <th>Autó típusa</th>
+         <th>Regisztrálás időpontja</th>
+         <th>Saját márkás-e</th>
+         <th>Balesetek száma</th>
+         <th>Legfrisebb esemény neve</th>
+         <th>Legfrisebb esemény dátuma</th>
        </tr>
      </thead>
      <tbody>
        <template v-for="car in cars" :key="car.car_id">
-         <tr>
-           <td><button @click="selectCar(car.car_id, car.registered)">{{ car.car_id }}</button></td>
+         <tr class="text-center align-middle">
+           <td><button @click="selectCar(car.car_id, car.registered)" class="btn w-100">{{ car.car_id }}</button></td>
            <td>{{ car.type }}</td>
            <td>{{ car.registered }}</td>
            <td>{{ car.ownbrand }}</td>

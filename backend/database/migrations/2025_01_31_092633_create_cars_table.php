@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->unsignedInteger('car_id');
             $table->string('type');
-            $table->date('registered');
+            $table->dateTime('registered')->date_format('Y-m-d H:i:s');
             $table->string('ownbrand');
             $table->string('accidents');
             $table->unique(['client_id', 'car_id']);
