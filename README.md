@@ -1,5 +1,7 @@
 # TesztFeladat
 
-Vue CLI v5.0.8
+Használt komponensek veziószámai:
 
-Laravel v11.41.3
+* Vue CLI v5.0.8
+* Laravel v11.41.3
+* PHP v8.2

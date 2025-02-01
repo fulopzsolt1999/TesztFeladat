@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-
+import Header from './components/Header.vue'
 </script>
 
 <template>
-  <header>
-    <div class="car-service">
-      <h1>Főoldal</h1>
-    </div>
-  </header>
-  
-  <RouterView />
+  <main class="container">
+    <Header />
+    <RouterView />
+  </main>  
 </template>
-

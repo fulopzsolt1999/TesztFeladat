@@ -11,7 +11,7 @@ Route::get('/', function () {
 });
 
 Route::get('/api/clients', function () {
-    return Clients::all();
+    return response()->json(Clients::all());
 });
 
 Route::get('/api/clients/{id}/get-cars', function ($id) {
@@ -26,8 +26,10 @@ Route::get('/api/clients/{id}/get-cars', function ($id) {
         $car->newest_event_date = $newestService ? $newestService->event_time : null;
     });
 
-    return response()->json([
-        'client' => $client,
-        'cars' => $cars
-    ]);
+    return response()->json(['cars' => $cars]);
+});
+
+Route::get('/api/services/{clientId}/{carId}/get-service', function ($clientId, $carId) {
+    $services = Services::where('car_id', $carId)->where('client_id', $clientId)->get();
+    return response()->json(['services' => $services]);
 });
